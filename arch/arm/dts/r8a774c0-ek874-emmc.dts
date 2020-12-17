@@ -49,16 +49,13 @@
 	};
 
 	vccq_sdhi0: regulator-vccq-sdhi0 {
-		compatible = "regulator-gpio";
+		compatible = "regulator-fixed";
 
 		regulator-name = "SDHI0 VccQ";
-		regulator-min-microvolt = <1800000>;
+		regulator-min-microvolt = <3300000>;
 		regulator-max-microvolt = <3300000>;
-
-		gpios = <&gpio3 13 GPIO_ACTIVE_HIGH>;
-		gpios-states = <1>;
-		states = <3300000 1
-			  1800000 0>;
+		regulator-boot-on;
+		regulator-always-on;
 	};
 };
 
@@ -146,20 +143,18 @@
 };
 
 &sdhi0 {
-	/* micro SD */
+	/* micro SD, no 1.8v supply avaiable. */
 	pinctrl-0 = <&sdhi0_pins>;
-	pinctrl-1 = <&sdhi0_pins_uhs>;
-	pinctrl-names = "default", "state_uhs";
+	pinctrl-names = "default";
 
 	vmmc-supply = <&reg_3p3v>;
 	vqmmc-supply = <&vccq_sdhi0>;
 	cd-gpios = <&gpio3 12 GPIO_ACTIVE_HIGH>;
 	bus-width = <4>;
-	sd-uhs-sdr50;
-	sd-uhs-sdr104;
 	non-removable;
+	cap-sd-highspeed;
 	status = "okay";
-	max-frequency = <208000000>;
+	max-frequency = <52000000>;
 };
 
 &sdhi3 {
