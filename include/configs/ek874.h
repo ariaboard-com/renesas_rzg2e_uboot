@@ -40,6 +40,24 @@
 	"fatload mmc 1:1 0x48000000 "CONFIG_DEFAULT_FDT_FILE"; " \
 	"booti 0x48080000 - 0x48000000"
 
+#define BOOTSDCOMMAND "fatload mmc 0:1 0x48080000 Image; " \
+	"fatload mmc 0:1 0x48000000 "CONFIG_DEFAULT_FDT_FILE"; " \
+	"booti 0x48080000 - 0x48000000"
+
+#define BOOTSDARGS "root=/dev/mmcblk0p2 rootwait rw " \
+	"video=HDMI-A-1:1280x720@60e"
+
+#ifdef CONFIG_EXTRA_ENV_SETTINGS
+#undef CONFIG_EXTRA_ENV_SETTINGS
+#endif
+
+#define CONFIG_EXTRA_ENV_SETTINGS \
+	"usb_pgood_delay=2000\0"	\
+	"fdt_high=0xffffffffffffffff\0"	\
+	"initrd_high=0xffffffffffffffff\0" \
+	"bootsd=setenv bootargs \"" BOOTSDARGS "\"; " \
+	BOOTSDCOMMAND
+
 #endif
 
 #endif /* __EK874_H */
