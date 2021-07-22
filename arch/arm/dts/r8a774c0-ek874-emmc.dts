@@ -128,10 +128,17 @@
 		function = "sdhi3";
 		power-source = <1800>;
         };
-};
 
-&usb2_phy0 {
-	status = "okay";
+	usb0_pins: usb {
+		groups = "usb0_b";
+		function = "usb0";
+	};
+
+	usb30_pins: usb30 {
+		groups = "usb30";
+		function = "usb30";
+	};
+
 };
 
 &rpc {
@@ -184,3 +191,29 @@
 	timeout-sec = <60>;
 	status = "okay";
 };
+
+&ehci0 {
+	dr_mode = "host";
+	status = "okay";
+};
+
+&ohci0 {
+	dr_mode = "host";
+	status = "okay";
+};
+
+&usb2_phy0 {
+	pinctrl-0 = <&usb0_pins>;
+	pinctrl-names = "default";
+
+	status = "okay";
+};
+
+&xhci0 {
+	pinctrl-0 = <&usb30_pins>;
+	pinctrl-names = "default";
+	dr_mode = "host";
+
+	status = "okay";
+};
+

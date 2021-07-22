@@ -150,6 +150,7 @@ static const struct udevice_id xhci_rcar_ids[] = {
 	{ .compatible = "renesas,xhci-r8a774a1" },
 	{ .compatible = "renesas,xhci-r8a774b1" },
 	{ .compatible = "renesas,xhci-r8a774e1" },
+	{ .compatible = "renesas,xhci-r8a774c0" },
 	{ }
 };
 
